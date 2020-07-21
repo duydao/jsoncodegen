@@ -58,11 +58,6 @@ class JsonSchemaBuilder implements IModelBuilder {
     Model buildModel(File modelFile) {
         def jsonSlurper = new JsonSlurper()
         def objectModel = jsonSlurper.parse(modelFile)
-        if (!objectModel['$schema']) {
-            def errorMsg='model file seems to be no JSON schema'
-            log.error(errorMsg)
-            throw new Exception(errorMsg)
-        }
         String currentSchemaPath = getBasePathFromModelFile(modelFile)
         Model model = initModel(objectModel)
         if (objectModel['definitions']) {
